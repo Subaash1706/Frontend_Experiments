@@ -1,0 +1,124 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html{
+    overflow-x: hidden;
+}
+:root{
+    --PRESET-ANIMATION-DURATION: 400ms;
+    --PRESET-ROTATION-ANGLE: 35deg;
+}
+body{
+    min-width: 100vw;
+    min-height: 100vh;
+    background-color: #101826;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+    position: relative;
+}
+.card-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 25px;
+    position: relative;
+}
+.card-container section{
+    perspective: 1000px;
+}
+.card{
+    width: 250px;
+    height: 55vh;
+    border: solid;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform var(--PRESET-ANIMATION-DURATION);
+}
+.card > *{
+    position: absolute;
+}
+.cardLogo{
+    width: 180px;
+    inset: auto auto 25px 15%;
+    transform-style: preserve-3d;
+    z-index: 100;
+    transition: transform var(--PRESET-ANIMATION-DURATION);
+}
+.mainImage{
+    bottom: 0;
+    width: inherit;
+    height: inherit;
+    object-fit: contain;
+    transform-origin: bottom;
+    z-index: 1;
+    opacity: 0;
+    transform: rotateX(calc((var(--PRESET-ROTATION-ANGLE))*-0.5));
+    transition: all var(--PRESET-ANIMATION-DURATION);
+}
+.card:hover{
+    transform: rotateX(var(--PRESET-ROTATION-ANGLE));
+    background: black;
+    transition: transform var(--PRESET-ANIMATION-DURATION);
+}
+.card-container:hover .card:not(:hover){
+    filter: saturate(0);
+    transition: filter var(--PRESET-ANIMATION-DURATION);
+}
+.card:hover .cardLogo{
+    transform: rotateX(calc((var(--PRESET-ROTATION-ANGLE))*-1)) translateZ(55px) scale(1.15);
+    filter: drop-shadow(5px 5px 10px black)  
+}
+.card:hover .mainImage{
+    opacity: 1;
+    transform-origin: bottom;
+    transform: rotateX(calc((var(--PRESET-ROTATION-ANGLE))*-1));
+    transition: all var(--PRESET-ANIMATION-DURATION);
+}
+.ironmanCard{
+    background: url(/images/ironmanCard.jpg) center/140%;
+}
+.capCard{
+    background: url(/images/cap-background-2.jpg) center/140%;
+}
+.hulkCard{
+    background: url(/images/hulk-background.jpg) center/150%;
+}
+.hulkMainImage{
+    filter: saturate(2);
+}
+.capLogo{
+    width: 80%;
+    left:11%;
+}
+.card:hover::after{
+    content: '';
+    position: absolute;
+    background-color: black;
+    bottom: -25px;
+    left: -5px;
+    right: -5px;
+    height: 85%;
+    z-index: -5;
+    filter: blur(20px);
+    transform:translateZ(-35px);
+}
+
+@media screen and (width < 765px) {
+    body{
+        padding: 10vh;
+    }
+    .card-container{
+        display: flex;
+        flex-direction: column;
+    }
+    .card{
+        margin: 0px 0px 5vh 0px;
+    }
+
+}
