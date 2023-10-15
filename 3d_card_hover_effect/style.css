@@ -20,6 +20,7 @@ body{
     align-items: center;
     perspective: 1000px;
     position: relative;
+    transition: all var(--PRESET-ANIMATION-DURATION);
 }
 .card-container{
     display: flex;
